@@ -3,7 +3,7 @@
 main entrypoint for server process
 */
 
-package gqlserver
+package main
 
 import (
   "fmt"

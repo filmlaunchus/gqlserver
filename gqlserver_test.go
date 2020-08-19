@@ -1,4 +1,4 @@
-package gql-service
+package main
 
 import (
   "testing"

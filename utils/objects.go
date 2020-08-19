@@ -1,11 +1,10 @@
 /* objects.go
 
 */
-package server
+package utils
 
 import (
-  "encoding/json"
-  "time"
+  // "encoding/json"
 )
 
 type UserObject struct {
