@@ -13,5 +13,5 @@ import (
 func (s *Server) GQLHandler(w http.ResponseWriter, r *http.Request) {
   query := r.URL.Query().Get("query")
   enc   := json.NewEncoder(w)
-  gqls.Do(guery, enc, s.objectStores)
+  gqls.Run(guery, enc, s.objectStores)
 }

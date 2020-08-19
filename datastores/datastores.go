@@ -5,21 +5,16 @@ package datastores
 
 import (
   "fmt"
+
+  "github.com/filmlaunchus/gqlserver/utils"
 )
 
-type CRUDStore interface {
-  Create(map[string]interface{}) (interface{}, error)
-  Read(id string) (interface{}, error)
-  Update(id string, map[string]interface{}) (interface{}, error)
-  Delete(id string) (interface{}, error)
-}
-
 type Datastore struct {
-  objectStores map[string]CRUDStore
+  objectStores map[string]utils.CRUDStore
 }
 
 func NewDatastore(mode string) *Datastore {
-  oS := make(map[string]CRUDStore)
+  oS := make(map[string]utils.CRUDStore)
   if mode == "mock" {
     oS["users"] = NewMockUserStore()
   }

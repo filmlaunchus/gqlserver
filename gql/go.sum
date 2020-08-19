@@ -1,0 +1,5 @@
+github.com/filmlaunchus/gqlserver v0.0.0-20200819012310-4e162a63d0aa h1:bbQcakUnFhWLhsxXOa2lP4m3ivZd0KIwk6XRUCp6v5Y=
+github.com/filmlaunchus/gqlserver/utils v0.0.0-20200819012310-4e162a63d0aa h1:a7FoQhoNKRW1Iv7zA05X4F13hBPW2+RAtydyxivgQhw=
+github.com/filmlaunchus/gqlserver/utils v0.0.0-20200819012310-4e162a63d0aa/go.mod h1:So6v0b0gF/bv2o4QxupMDDckSKlAdmmpuad/eRX46Ms=
+github.com/graphql-go/graphql v0.7.9 h1:5Va/Rt4l5g3YjwDnid3vFfn43faaQBq7rMcIZ0VnV34=
+github.com/graphql-go/graphql v0.7.9/go.mod h1:k6yrAYQaSP59DC5UVxbgxESlmVyojThKdORUqGDGmrI=

@@ -9,7 +9,7 @@ import (
 
   "github.com/rs/xid"
 
-  "github.com/filmlaunchus/gqlserver/utils"
+  "../utils"
 )
 
 // implements CRUDStore interface

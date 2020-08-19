@@ -7,11 +7,7 @@ import (
   "github.com/graphql-go/graphql"
 )
 
-var (
-  mutationType
-)
-
-mutationType = graphql.NewObject(graphql.ObjectConfig{
+var mutationType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Mutation",
 	Fields: graphql.Fields{
 		"createUser": &createUserMut,

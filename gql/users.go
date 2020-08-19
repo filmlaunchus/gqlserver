@@ -5,22 +5,14 @@
 package gql
 
 import (
-  "fmt"
+  // "fmt"
 
   "github.com/graphql-go/graphql"
 
   "github.com/filmlaunchus/gqlserver/utils"
 )
 
-var (
-  userType,
-  userQuery,
-  createUserMut,
-  updateUserMut,
-  deleteUserMut,
-)
-
-userType = graphql.NewObject(graphql.ObjectConfig{
+var userType = graphql.NewObject(graphql.ObjectConfig{
   Name: "User",
   Fields: graphql.Fields{
     "id": &graphql.Field{
@@ -39,6 +31,7 @@ userType = graphql.NewObject(graphql.ObjectConfig{
       Resolve: func (p graphql.ResolveParams) (interface{}, error) {
         if user, ok := p.Source.(utils.UserObject); ok {
           return user.Username, nil
+        }
         return nil, nil
       },
     },
@@ -55,7 +48,7 @@ userType = graphql.NewObject(graphql.ObjectConfig{
   },
 })
 
-userQuery = graphql.Field{
+var userQuery = graphql.Field{
   Type: userType,
   Args: graphql.FieldConfigArgument{
     "id": &graphql.ArgumentConfig{
@@ -64,13 +57,13 @@ userQuery = graphql.Field{
     },
   },
   Resolve: func (p graphql.ResolveParams) (interface{}, error) {
-    objs := p.Info.RootValue.(map[string]interface{})
+    objs := p.Info.RootValue.(map[string]CRUDStore)
     user, err := objs["users"].Read(p.Args["id"])
     return user, err
   },
 }
 
-createUserMut = graphql.Field{
+var createUserMut = graphql.Field{
   Type: userType,
   Description: "Create new user",
   Args: graphql.FieldConfigArgument{
@@ -88,7 +81,7 @@ createUserMut = graphql.Field{
   },
 }
 
-updateUserMut = graphql.Field{
+var updateUserMut = graphql.Field{
   Type: userType,
   Description: "Update user by id",
   Args: graphql.FieldConfigArgument{
@@ -99,14 +92,14 @@ updateUserMut = graphql.Field{
       Type: graphql.NewNonNull(graphql.String),
     },
   },
-  Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+  Resolve: func(p graphql.ResolveParams) (interface{}, error) {
     objs := p.Info.RootValue.(map[string]interface{})
     user, err := objs["users"].Update(p.Args)
     return user, err
   },
 }
 
-deleteUserMut = graphql.Field{
+var deleteUserMut = graphql.Field{
   Type: userType,
   Description: "Delete product by id",
   Args: graphql.FieldConfigArgument{
@@ -114,7 +107,7 @@ deleteUserMut = graphql.Field{
       Type: graphql.NewNonNull(graphql.Int),
     },
   },
-  Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+  Resolve: func(p graphql.ResolveParams) (interface{}, error) {
     objs := p.Info.RootValue.(map[string]interface{})
     user, err := objs["users"].Delete(p.Args)
     return user, err

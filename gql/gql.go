@@ -22,12 +22,10 @@ type GQL struct {
 }
 
 func NewGQL() *GQL {
-  return &GQL{
-    schema: MainSchema
-  }
+  return &GQL{schema: MainSchema}
 }
 
-func (gqls *GQL) Do(guery string, enc Encoder, root map[string]interface{}) {
+func (gqls *GQL) Run(query string, enc json.Encoder, root map[string]interface{}) {
   result := graphql.Do(graphql.Params{
     RequestString: query,
     RootObject:    root,
