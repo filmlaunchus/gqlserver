@@ -9,8 +9,8 @@ import (
 
   "github.com/gorilla/mux"
 
-  ds  "github.com/filmlaunchus/gql-service/datastores"
-  gql "github.com/filmlaunchus/gql-service/gql"
+  ds  "github.com/filmlaunchus/gqlserver/datastores"
+  gql "github.com/filmlaunchus/gqlserver/gql"
 )
 
 type Server struct {

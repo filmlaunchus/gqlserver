@@ -1,3 +1,3 @@
-module github.com/filmlaunchus/gql-service/datastores
+module github.com/filmlaunchus/gqlserver/datastores
 
 go 1.14

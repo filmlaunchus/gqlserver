@@ -8,7 +8,7 @@ package gqlserver
 import (
   "fmt"
 
-  "github.com/filmlaunchus/gql-service/server"
+  "github.com/filmlaunchus/gqlserver/server"
 )
 
 func main() {

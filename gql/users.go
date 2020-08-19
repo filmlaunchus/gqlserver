@@ -9,7 +9,7 @@ import (
 
   "github.com/graphql-go/graphql"
 
-  "github.com/filmlaunchus/gql-service/server"
+  "github.com/filmlaunchus/gqlserver/server"
 )
 
 var (
