@@ -4,7 +4,7 @@
 package datastores
 
 import (
-  // "fmt"
+  "fmt"
   "errors"
 
   "github.com/rs/xid"
@@ -23,11 +23,13 @@ func NewMockUserStore() *MockUserStore {
 }
 
 func (mus *MockUserStore) Create(params map[string]interface{}) (interface{}, error) {
-  uid   := xid.New()
+  uid   := xid.New().String()
   usern := params["username"].(string)
   email := params["email"].(string)
 
-  uo := &utils.UserObject{uid.String(), usern, email}
+  fmt.Println("Creating new user object")
+
+  uo := &utils.UserObject{uid, usern, email}
   mus.users = append(mus.users, uo)
   return uo, nil
 }

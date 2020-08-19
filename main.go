@@ -6,12 +6,12 @@ main entrypoint for server process
 package main
 
 import (
-  "fmt"
+  // "fmt"
 
   "github.com/filmlaunchus/gqlserver/server"
 )
 
 func main() {
-  s := server.NewServer(nil)
+  s := server.NewServer("")
   s.Run()
 }

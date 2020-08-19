@@ -38,6 +38,6 @@ func (s *Server) Run() {
   router.HandleFunc("/gql", s.GQLHandler)
   http.Handle("/", router)
 
-  fmt.Println("Server is running on port %s", s.config.port)
+  fmt.Println("Server is running on port ", s.config.port)
   http.ListenAndServe(":"+s.config.port, nil)
 }

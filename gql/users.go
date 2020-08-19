@@ -5,7 +5,7 @@
 package gql
 
 import (
-  // "fmt"
+  "fmt"
 
   "github.com/graphql-go/graphql"
 
@@ -19,9 +19,10 @@ var userType = graphql.NewObject(graphql.ObjectConfig{
       Type: graphql.NewNonNull(graphql.String),
       Description: "User GUID",
       Resolve: func (p graphql.ResolveParams) (interface{}, error) {
-        if user, ok := p.Source.(utils.UserObject); ok {
+        if user, ok := p.Source.(*utils.UserObject); ok {
           return user.Id, nil
         }
+        fmt.Println("not a UO??")
         return nil, nil
       },
     },
@@ -29,7 +30,7 @@ var userType = graphql.NewObject(graphql.ObjectConfig{
       Type: graphql.String,
       Description: "User's username",
       Resolve: func (p graphql.ResolveParams) (interface{}, error) {
-        if user, ok := p.Source.(utils.UserObject); ok {
+        if user, ok := p.Source.(*utils.UserObject); ok {
           return user.Username, nil
         }
         return nil, nil
@@ -39,7 +40,7 @@ var userType = graphql.NewObject(graphql.ObjectConfig{
       Type: graphql.String,
       Description: "User Email",
       Resolve: func (p graphql.ResolveParams) (interface{}, error) {
-        if user, ok := p.Source.(utils.UserObject); ok {
+        if user, ok := p.Source.(*utils.UserObject); ok {
           return user.Email, nil
         }
         return nil, nil
@@ -57,8 +58,8 @@ var userQuery = graphql.Field{
     },
   },
   Resolve: func (p graphql.ResolveParams) (interface{}, error) {
-    objs := p.Info.RootValue.(map[string]CRUDStore)
-    user, err := objs["users"].Read(p.Args["id"].(string))
+    objs := p.Info.RootValue.(map[string]interface{})
+    user, err := objs["users"].(CRUDStore).Read(p.Args["id"].(string))
     return user, err
   },
 }
@@ -75,8 +76,9 @@ var createUserMut = graphql.Field{
     },
   },
   Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-    objs := p.Info.RootValue.(map[string]CRUDStore)
-    user, err := objs["users"].Create(p.Args)
+    objs := p.Info.RootValue.(map[string]interface{})
+    user, err := objs["users"].(CRUDStore).Create(p.Args)
+    fmt.Println("created new user object", user)
     return user, err
   },
 }
@@ -89,12 +91,15 @@ var updateUserMut = graphql.Field{
       Type: graphql.NewNonNull(graphql.String),
     },
     "email": &graphql.ArgumentConfig{
-      Type: graphql.NewNonNull(graphql.String),
+      Type: graphql.String,
+    },
+    "username": &graphql.ArgumentConfig{
+      Type: graphql.String,
     },
   },
   Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-    objs := p.Info.RootValue.(map[string]CRUDStore)
-    user, err := objs["users"].Update(p.Args["id"].(string), p.Args)
+    objs := p.Info.RootValue.(map[string]interface{})
+    user, err := objs["users"].(CRUDStore).Update(p.Args["id"].(string), p.Args)
     return user, err
   },
 }
@@ -104,12 +109,12 @@ var deleteUserMut = graphql.Field{
   Description: "Delete product by id",
   Args: graphql.FieldConfigArgument{
     "id": &graphql.ArgumentConfig{
-      Type: graphql.NewNonNull(graphql.Int),
+      Type: graphql.NewNonNull(graphql.String),
     },
   },
   Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-    objs := p.Info.RootValue.(map[string]CRUDStore)
-    user, err := objs["users"].Delete(p.Args["id"].(string))
+    objs := p.Info.RootValue.(map[string]interface{})
+    user, err := objs["users"].(CRUDStore).Delete(p.Args["id"].(string))
     return user, err
   },
 }

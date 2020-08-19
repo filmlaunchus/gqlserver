@@ -1,5 +1,7 @@
 github.com/buger/jsonparser v1.0.0 h1:etJTGF5ESxjI0Ic2UaLQs2LQQpa8G9ykQScukbh4L8A=
 github.com/buger/jsonparser v1.0.0/go.mod h1:tgcrVJ81GPSF0mz+0nu1Xaz0fazGPrmmJfJtxjbHhUQ=
+github.com/filmlaunchus/gqlserver v0.0.0-20200819022312-ef929bff12dd/go.mod h1:x47MlBs1dp1bNyX4H9HgHzBrTVAs1mtOrGy9h+5EWIY=
+github.com/filmlaunchus/gqlserver v0.0.0-20200819030952-552d29eb3f3a/go.mod h1:xfMZVw6clI17Jz9xIKVhQ1yUkffkOrFrTlHL21eFGSg=
 github.com/filmlaunchus/gqlserver/datastores v0.0.0-20200819010646-bf51cb5cc2ea/go.mod h1:fCGiWf36OJUdrKOm7dtmvhLTMLdXE1L/oDS2Nvv/3Xw=
 github.com/filmlaunchus/gqlserver/datastores v0.0.0-20200819015848-8c69ec922f9f h1:1B/mL0VyGwlpdh5yT3vsV1L4loTAJYQR70QzmYTNGoY=
 github.com/filmlaunchus/gqlserver/datastores v0.0.0-20200819015848-8c69ec922f9f/go.mod h1:fCGiWf36OJUdrKOm7dtmvhLTMLdXE1L/oDS2Nvv/3Xw=
