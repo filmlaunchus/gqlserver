@@ -8,12 +8,12 @@ import (
 )
 
 type CRUDStore interface {
-  Create(map[string]interface{}) (interface{}, error)
+  Create(p map[string]interface{}) (interface{}, error)
   Read(id string) (interface{}, error)
-  Update(id string, map[string]interface{}) (interface{}, error)
+  Update(id string, p map[string]interface{}) (interface{}, error)
   Delete(id string) (interface{}, error)
 }
 
-func adder(a, b int) int {
+func adder(a int, b int) int {
   return a+b
 }

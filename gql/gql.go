@@ -12,6 +12,13 @@ import (
   "github.com/graphql-go/graphql"
 )
 
+type CRUDStore interface {
+  Create(params map[string]interface{}) (interface{}, error)
+  Read(id string) (interface{}, error)
+  Update(id string, params map[string]interface{}) (interface{}, error)
+  Delete(id string) (interface{}, error)
+}
+
 var MainSchema, _ = graphql.NewSchema(graphql.SchemaConfig{
   Query:    queryType,
   Mutation: mutationType,

@@ -58,7 +58,7 @@ var userQuery = graphql.Field{
   },
   Resolve: func (p graphql.ResolveParams) (interface{}, error) {
     objs := p.Info.RootValue.(map[string]CRUDStore)
-    user, err := objs["users"].Read(p.Args["id"])
+    user, err := objs["users"].Read(p.Args["id"].(string))
     return user, err
   },
 }
@@ -75,7 +75,7 @@ var createUserMut = graphql.Field{
     },
   },
   Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-    objs := p.Info.RootValue.(map[string]interface{})
+    objs := p.Info.RootValue.(map[string]CRUDStore)
     user, err := objs["users"].Create(p.Args)
     return user, err
   },
@@ -93,8 +93,8 @@ var updateUserMut = graphql.Field{
     },
   },
   Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-    objs := p.Info.RootValue.(map[string]interface{})
-    user, err := objs["users"].Update(p.Args)
+    objs := p.Info.RootValue.(map[string]CRUDStore)
+    user, err := objs["users"].Update(p.Args["id"].(string), p.Args)
     return user, err
   },
 }
@@ -108,8 +108,8 @@ var deleteUserMut = graphql.Field{
     },
   },
   Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-    objs := p.Info.RootValue.(map[string]interface{})
-    user, err := objs["users"].Delete(p.Args)
+    objs := p.Info.RootValue.(map[string]CRUDStore)
+    user, err := objs["users"].Delete(p.Args["id"].(string))
     return user, err
   },
 }

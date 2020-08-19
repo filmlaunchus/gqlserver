@@ -1,3 +1,6 @@
 github.com/filmlaunchus/gqlserver v0.0.0-20200819010646-bf51cb5cc2ea h1:TuMT4qfvIUR2intPlqS5dmti++8hw1fcRa2t1l9DxqY=
+github.com/filmlaunchus/gqlserver v0.0.0-20200819015848-8c69ec922f9f h1:NKQLdWnFijBDhXa6QxoWEr3etjz/J0s7HaPg0bXfclw=
+github.com/filmlaunchus/gqlserver/utils v0.0.0-20200819012310-4e162a63d0aa h1:a7FoQhoNKRW1Iv7zA05X4F13hBPW2+RAtydyxivgQhw=
+github.com/filmlaunchus/gqlserver/utils v0.0.0-20200819012310-4e162a63d0aa/go.mod h1:So6v0b0gF/bv2o4QxupMDDckSKlAdmmpuad/eRX46Ms=
 github.com/rs/xid v1.2.1 h1:mhH9Nq+C1fY2l1XIpgxIiUOfNpRBYH1kKcr+qfKgjRc=
 github.com/rs/xid v1.2.1/go.mod h1:+uKXf+4Djp6Md1KODXJxgGQPKngRmWyn10oCKFzNHOQ=
