@@ -27,7 +27,7 @@ func NewServer(configPath string) *Server {
   return &Server{
     config:   conf,
     objects:  store,
-    GQLEntry: gqle
+    GQLEntry: gqle,
   }
 }
 

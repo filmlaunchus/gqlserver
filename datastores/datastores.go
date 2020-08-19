@@ -20,3 +20,7 @@ func NewDatastore(mode string) *Datastore {
   }
   return &Datastore{objectStores: oS}
 }
+
+func (ds *Datastore) getStores() map[string]interface{} {
+  return ds.objectStores
+}

@@ -21,15 +21,12 @@ type Config struct {
 }
 
 func NewConfig(cP string) *Config {
-  conf := &Config{
-    port: defaultPort,
-    mode: defaultMode
-  }
-  if cP != nil {
+  conf := &Config{port: defaultPort, mode: defaultMode}
+  if cP != "" {
     data, err := ioutil.ReadFile(cP)
     if err != nil {
       fmt.Println("File reading error", err)
-      return
+      return nil
     }
     if val, err := jsonparser.GetString(data, "config", "mode"); err != nil {
       conf.mode = val
