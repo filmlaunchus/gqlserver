@@ -14,20 +14,20 @@ import (
 )
 
 type Server struct {
-    config   *Config
-    objects  *ds.Datastore
-    GQLEntry *gql.GQL
+    config        *Config
+    objectStores  map[string]interface{}
+    GQLEntry      *gql.GQL
 }
 
 // init server
 func NewServer(configPath string) *Server {
   conf  := NewConfig(configPath)
-  store := ds.NewDatastore(conf.mode)
+  store := ds.InitStores(conf.mode)
   gqle  := gql.NewGQL()
   return &Server{
-    config:   conf,
-    objects:  store,
-    GQLEntry: gqle,
+    config:        conf,
+    objectStores:  store,
+    GQLEntry:      gqle,
   }
 }
 

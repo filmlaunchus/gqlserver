@@ -9,18 +9,10 @@ import (
   // "github.com/filmlaunchus/gqlserver/utils"
 )
 
-type Datastore struct {
-  objectStores map[string]interface{}
-}
-
-func NewDatastore(mode string) *Datastore {
+func InitStores(mode string) map[string]interface{} {
   oS := make(map[string]interface{})
   if mode == "mock" {
     oS["users"] = NewMockUserStore()
   }
-  return &Datastore{objectStores: oS}
-}
-
-func (ds *Datastore) getStores() map[string]interface{} {
-  return ds.objectStores
+  return oS
 }
