@@ -1,0 +1,122 @@
+/* users.go
+
+*/
+
+package gql
+
+import (
+  "fmt"
+
+  "github.com/graphql-go/graphql"
+
+  "github.com/filmlaunchus/gql-service/server"
+)
+
+var (
+  userType,
+  userQuery,
+  createUserMut,
+  updateUserMut,
+  deleteUserMut,
+)
+
+userType = graphql.NewObject(graphql.ObjectConfig{
+  Name: "User",
+  Fields: graphql.Fields{
+    "id": &graphql.Field{
+      Type: graphql.NewNonNull(graphql.String),
+      Description: "User GUID",
+      Resolve: func (p graphql.ResolveParams) (interface{}, error) {
+        if user, ok := p.Source.(server.UserObject); ok {
+          return user.Id, nil
+        }
+        return nil, nil
+      },
+    },
+    "awsid": &graphql.Field{
+      Type: graphql.String,
+      Description: "User AWS ID (for S3)",
+      Resolve: func (p graphql.ResolveParams) (interface{}, error) {
+        if user, ok := p.Source.(server.UserObject); ok {
+          return user.AWSId, nil
+        return nil, nil
+      },
+    },
+    "email": &graphql.Field{
+      Type: graphql.String,
+      Description: "User Email",
+      Resolve: func (p graphql.ResolveParams) (interface{}, error) {
+        if user, ok := p.Source.(server.UserObject); ok {
+          return user.Email, nil
+        }
+        return nil, nil
+      },
+    },
+  },
+})
+
+userQuery = graphql.Field{
+  Type: userType,
+  Args: graphql.FieldConfigArgument{
+    "id": &graphql.ArgumentConfig{
+      Description: "id of user that you wanna get",
+      Type: graphql.NewNonNull(graphql.String),
+    },
+  },
+  Resolve: func (p graphql.ResolveParams) (interface{}, error) {
+    objs := p.Info.RootValue.(map[string]interface{})
+    user, err := objs["users"].Read(p.Args["id"])
+    return user, err
+  },
+}
+
+createUserMut = graphql.Field{
+  Type: userType,
+  Description: "Create new user",
+  Args: graphql.FieldConfigArgument{
+    "username": &graphql.ArgumentConfig{
+      Type: graphql.NewNonNull(graphql.String),
+    },
+    "email": &graphql.ArgumentConfig{
+      Type: graphql.NewNonNull(graphql.String),
+    },
+  },
+  Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+    objs := p.Info.RootValue.(map[string]interface{})
+    user, err := objs["users"].Create(p.Args)
+    return user, err
+  },
+}
+
+updateUserMut = graphql.Field{
+  Type: userType,
+  Description: "Update user by id",
+  Args: graphql.FieldConfigArgument{
+    "id": &graphql.ArgumentConfig{
+      Type: graphql.NewNonNull(graphql.String),
+    },
+    "email": &graphql.ArgumentConfig{
+      Type: graphql.NewNonNull(graphql.String),
+    },
+  },
+  Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+    objs := p.Info.RootValue.(map[string]interface{})
+    user, err := objs["users"].Update(p.Args)
+    return user, err
+  },
+}
+
+deleteUserMut = graphql.Field{
+  Type: userType,
+  Description: "Delete product by id",
+  Args: graphql.FieldConfigArgument{
+    "id": &graphql.ArgumentConfig{
+      Type: graphql.NewNonNull(graphql.Int),
+    },
+  },
+  Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+    objs := p.Info.RootValue.(map[string]interface{})
+    user, err := objs["users"].Delete(p.Args)
+    return user, err
+  },
+}

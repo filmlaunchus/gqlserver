@@ -1,0 +1,19 @@
+GraphQL Schema Definition:
+
+type user {
+  id: String!,
+  awsid: String!,
+  firstname: String!,
+  lastname: String!,
+  email: String!
+}
+
+type query {
+  user(id: $ID)
+}
+
+type mutations {
+  createUserMut,
+  updateUserMut,
+  deleteUserMut
+}
