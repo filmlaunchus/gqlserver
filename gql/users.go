@@ -9,7 +9,7 @@ import (
 
   "github.com/graphql-go/graphql"
 
-  "github.com/filmlaunchus/gqlserver/server"
+  "github.com/filmlaunchus/gqlserver/utils"
 )
 
 var (
@@ -27,18 +27,18 @@ userType = graphql.NewObject(graphql.ObjectConfig{
       Type: graphql.NewNonNull(graphql.String),
       Description: "User GUID",
       Resolve: func (p graphql.ResolveParams) (interface{}, error) {
-        if user, ok := p.Source.(server.UserObject); ok {
+        if user, ok := p.Source.(utils.UserObject); ok {
           return user.Id, nil
         }
         return nil, nil
       },
     },
-    "awsid": &graphql.Field{
+    "username": &graphql.Field{
       Type: graphql.String,
-      Description: "User AWS ID (for S3)",
+      Description: "User's username",
       Resolve: func (p graphql.ResolveParams) (interface{}, error) {
-        if user, ok := p.Source.(server.UserObject); ok {
-          return user.AWSId, nil
+        if user, ok := p.Source.(utils.UserObject); ok {
+          return user.Username, nil
         return nil, nil
       },
     },
@@ -46,7 +46,7 @@ userType = graphql.NewObject(graphql.ObjectConfig{
       Type: graphql.String,
       Description: "User Email",
       Resolve: func (p graphql.ResolveParams) (interface{}, error) {
-        if user, ok := p.Source.(server.UserObject); ok {
+        if user, ok := p.Source.(utils.UserObject); ok {
           return user.Email, nil
         }
         return nil, nil
